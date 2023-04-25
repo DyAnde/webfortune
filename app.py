@@ -12,12 +12,14 @@ def index():
 
 @app.route('/fortune/')
 def fortune():
+	output = os.system('fortune')
     return '<pre>' + output + '</pre>' 
 
 @app.route('/cowsay/<message>/')
 def cowsay(message):
-    return cowsay(message) 
+    return os.system(f'cowsay({message})')
 
 @app.route('/cowfortune/')
 def cowfortune():
-    return redirect(url_for('fortune'))
+	output = os.system('fortune')
+	return os.system(f'cowsay({output})')
