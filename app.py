@@ -1,31 +1,37 @@
 from flask import (
-        abort, Flask, jsonify, redirect, render_template, request,
-        session, url_for
-)
+		abort, Flask, jsonify, redirect, render_template, request,
+		session, url_for
+		)
 import os 
 
 app = Flask(__name__)
 
+TEMP_FILE = 'temp.txt'
+
 @app.route('/')
 def index():
-    return redirect(url_for('fortune'))
+	return redirect(url_for('fortune'))
 
 @app.route('/fortune/')
 def fortune():
-    #output = os.system('fortune')
-    #return '<pre>' + str(output) + '</pre>' 
-    return 'THIS IS WHERE FORTUNE WOULD BE IF IT WORKED'
+	os.system('fortune > temp.txt')
+	with open(TEMP_FILE, 'r') as f:
+		reee = f.read()
+	os.remove(TEMP_FILE)
+	return reee 
 
 @app.route('/cowsay/<message>/')
 def cowsay(message):
-    os.system(f'cowsay({message}) > temp.txt')
-    with open('temp.txt', 'r') as f:
-        ahhh = f.read()
-    os.remove('temp.txt')
-    return '<pre>' + ahhh + '</pre>'
+	os.system('cowsay '+message+' > temp.txt')
+	with open(TEMP_FILE, 'r') as f:
+		ahhh = f.read()
+	os.remove(TEMP_FILE)
+	return '<pre>' + ahhh + '</pre>'
 
 @app.route('/cowfortune/')
 def cowfortune():
-    #output = os.system('fortune')
-    #return os.system(f'cowsay({output})')
-    return 
+	os.system('fortune | cowsay > temp.txt')
+	with open(TEMP_FILE, 'r') as f:
+		reah = f.read()
+	os.remove(TEMP_FILE)
+	return '<pre>' + reah + '</pre>'
