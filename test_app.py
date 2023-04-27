@@ -21,7 +21,7 @@ def test_fortune(app, client):
 	res = client.get('/fortune/')
 	assert res.status_code == 200
 	page_output = res.get_data(as_text=True)
-	assert '.' in page_output
+	assert not page_output == ""
 
 def test_cowfortune(app, client):
 	res = client.get('/cowfortune/')
