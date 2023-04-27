@@ -1,4 +1,5 @@
 import pytest
+import os
 from app import app as flask_app
 
 @pytest.fixture
@@ -15,3 +16,16 @@ def test_cowsay(app, client):
 	assert res.status_code == 200
 	page_output = res.get_data(as_text=True)
 	assert message in page_output
+
+def test_fortune(app, client):
+	res = client.get('/fortune/')
+	assert res.status_code == 200
+
+def test_cowfortune(app, client):
+	res = client.get('/cowfortune/')
+	assert res.status_code == 200
+	page_output = res.get_data(as_text=True)
+	assert '(__)'
+
+def test_temp_removed():
+	assert not os.path.exists('temp.txt')
