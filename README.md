@@ -16,7 +16,7 @@ NOTE: Be sure to close docker when you are done using `docker rm -f <docker id>`
 
   `apt-get install -y python3.10`
   
-  `apt-get install -y python3-pi`
+  `apt-get install -y python3-pip`
  
   `pip3 install -r requirements.txt`
   
