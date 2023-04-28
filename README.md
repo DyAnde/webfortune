@@ -12,7 +12,7 @@ NOTE: Be sure to close docker when you are done using `docker rm -f <docker id>`
 
 
 ### Run from the Command Line
-Download all requirements:
+#### Download all requirements:
 
   `apt-get install -y python3.10`
   
@@ -23,4 +23,10 @@ Download all requirements:
   `apt-get install -y fortune fortunes`
   
   `apt-get install -y cowsay`
+  
+#### Run program:
+  `flask run`
+  
+#### To use pytest:
+  `pytest`
   
